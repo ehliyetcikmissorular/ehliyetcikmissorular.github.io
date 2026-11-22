@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Ücretsiz 10 Soru | Son Gece Ehliyet Kampı</title>
+<meta name="description" content="Ehliyet e-sınavına hazırlık: 10 görselli soruyu ücretsiz çöz, seviyeni gör. Üyelik gerekmez.">
+<meta property="og:title" content="Bu levhayı biliyor musun? 10 soruyu ücretsiz çöz">
+<meta property="og:description" content="Son Gece Ehliyet Kampı • Görselli hap sorular • Üyelik gerekmez">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#E30613; --red-d:#B10510; --navy:#0F1B3D; --yellow:#FFD400;
+    --bg:#F4F5F9; --card:#fff; --text:#0F1B3D; --muted:#5B6480;
+    --ok:#1E9E4A; --ok-bg:#E6F6EC; --bad:#E30613; --bad-bg:#FDE8EA;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);
+       display:flex;justify-content:center;min-height:100dvh}
+  .app{width:100%;max-width:480px;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg)}
+  header{background:var(--navy);color:#fff;padding:14px 18px;display:flex;align-items:center;gap:10px}
+  header .logo{width:34px;height:34px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:18px}
+  header .brand{font-weight:800;font-size:15px;line-height:1.1}
+  header .brand small{display:block;font-weight:500;font-size:11px;opacity:.75}
+  main{flex:1;padding:18px;display:flex;flex-direction:column}
+  .screen{display:none;flex:1;flex-direction:column}
+  .screen.active{display:flex}
+
+  /* Intro */
+  .pill{align-self:center;background:var(--yellow);color:var(--navy);font-weight:800;font-size:13px;padding:6px 16px;border-radius:99px;letter-spacing:.5px}
+  h1{font-size:34px;line-height:1.05;font-weight:900;text-align:center;margin:16px 0 6px}
+  h1 span{color:var(--red)}
+  .sub{text-align:center;color:var(--muted);font-size:15px;margin-bottom:18px}
+  .hero-sign{display:grid;place-items:center;margin:6px 0 18px}
+  .hero-sign .tile{background:#fff;border-radius:24px;padding:18px;box-shadow:0 10px 30px rgba(15,27,61,.12)}
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+  .feat div{background:#fff;border-radius:14px;padding:12px;font-size:13px;font-weight:700;display:flex;gap:8px;align-items:center;box-shadow:0 2px 8px rgba(15,27,61,.06)}
+  .btn{display:block;width:100%;border:0;border-radius:16px;padding:17px;font:800 18px 'Poppins',sans-serif;cursor:pointer;
+       background:var(--red);color:#fff;box-shadow:0 6px 0 var(--red-d);transition:transform .08s, box-shadow .08s;text-align:center;text-decoration:none}
+  .btn:active{transform:translateY(4px);box-shadow:0 2px 0 var(--red-d)}
+  .btn.secondary{background:#fff;color:var(--navy);box-shadow:0 6px 0 #D5D9E5;border:2px solid #E3E6EF}
+  .note{text-align:center;color:var(--muted);font-size:12px;margin-top:14px}
+
+  /* Quiz */
+  .topbar{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;margin-bottom:8px}
+  .topbar .timer{display:flex;align-items:center;gap:6px;background:#fff;padding:4px 12px;border-radius:99px;box-shadow:0 2px 8px rgba(15,27,61,.08)}
+  .topbar .timer.warn{color:var(--red)}
+  .progress{height:8px;background:#DDE1EB;border-radius:99px;overflow:hidden;margin-bottom:6px}
+  .progress i{display:block;height:100%;background:var(--red);border-radius:99px;transition:width .3s}
+  .timebar{height:4px;background:#E7E9F0;border-radius:99px;overflow:hidden;margin-bottom:16px}
+  .timebar i{display:block;height:100%;background:var(--yellow);width:100%}
+  .qcard{background:#fff;border-radius:20px;padding:18px;box-shadow:0 8px 24px rgba(15,27,61,.08);margin-bottom:14px}
+  .cat{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--navy);padding:3px 10px;border-radius:99px;margin-bottom:10px}
+  .qtext{font-size:18px;font-weight:800;line-height:1.3}
+  .qimg{display:grid;place-items:center;margin-top:14px}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid #E3E6EF;border-radius:14px;padding:13px 14px;
+       font:600 15px 'Poppins',sans-serif;color:var(--text);text-align:left;cursor:pointer;width:100%}
+  .opt b{flex:none;width:30px;height:30px;border-radius:9px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:14px}
+  .opt.correct{border-color:var(--ok);background:var(--ok-bg)}
+  .opt.correct b{background:var(--ok)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+  .opt.wrong b{background:var(--bad)}
+  .opt:disabled{cursor:default}
+  .explain{display:none;margin-top:14px;background:#FFF8D6;border-radius:14px;padding:12px 14px;font-size:14px;line-height:1.45}
+  .explain.show{display:block}
+  .explain strong{display:block;margin-bottom:2px}
+  #nextBtn{display:none;margin-top:16px}
+  #nextBtn.show{display:block}
+
+  /* Result */
+  .score-ring{width:170px;height:170px;border-radius:50%;margin:10px auto 14px;display:grid;place-items:center;
+              background:conic-gradient(var(--red) calc(var(--p)*1%), #DDE1EB 0)}
+  .score-ring div{width:136px;height:136px;border-radius:50%;background:var(--bg);display:grid;place-items:center;text-align:center}
+  .score-ring strong{font-size:44px;font-weight:900;line-height:1}
+  .score-ring small{display:block;font-size:13px;color:var(--muted);font-weight:600}
+  .verdict{text-align:center;font-size:22px;font-weight:900;margin-bottom:6px}
+  .verdict-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:18px;line-height:1.45}
+  .offer{background:var(--navy);color:#fff;border-radius:20px;padding:18px;margin-bottom:16px}
+  .offer h3{font-size:18px;font-weight:900;margin-bottom:8px}
+  .offer h3 span{color:var(--yellow)}
+  .offer ul{list-style:none;font-size:14px;line-height:1.9}
+  .offer .soon{display:inline-block;margin-top:10px;background:var(--yellow);color:var(--navy);font-weight:800;font-size:12px;padding:4px 12px;border-radius:99px}
+  .stack{display:flex;flex-direction:column;gap:14px}
+  footer{text-align:center;font-size:11px;color:var(--muted);padding:14px 18px 20px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="logo">🌙</div>
+    <div class="brand">Son Gece Ehliyet Kampı<small>Görselli hap sorular</small></div>
+  </header>
+
+  <main>
+    <!-- INTRO -->
+    <section class="screen active" id="intro">
+      <span class="pill">ÜCRETSİZ • 10 SORU</span>
+      <h1>Bu levhayı<br><span>biliyor musun?</span></h1>
+      <p class="sub">Her soru için 10 saniyen var. Bakalım sınava ne kadar hazırsın!</p>
+      <div class="hero-sign"><div class="tile" id="heroSign"></div></div>
+      <div class="feat">
+        <div>🚦 Trafik</div><div>⛑️ İlk Yardım</div>
+        <div>🔧 Araç Tekniği</div><div>⏱️ 10 sn / soru</div>
+      </div>
+      <button class="btn" id="startBtn">TESTE BAŞLA ›</button>
+      <p class="note">Üyelik gerekmez • Telefonundan hemen çöz</p>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="screen" id="quiz">
+      <div class="topbar">
+        <span id="qCount">Soru 1 / 10</span>
+        <span class="timer" id="timer">⏱️ <span id="tLeft">10</span> sn</span>
+      </div>
+      <div class="progress"><i id="prog"></i></div>
+      <div class="timebar"><i id="tbar"></i></div>
+      <div class="qcard">
+        <span class="cat" id="qCat"></span>
+        <div class="qtext" id="qText"></div>
+        <div class="qimg" id="qImg"></div>
+      </div>
+      <div class="opts" id="opts"></div>
+      <div class="explain" id="explain"></div>
+      <button class="btn" id="nextBtn">Sonraki Soru ›</button>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen" id="result">
+      <div class="score-ring" id="ring"><div><span><strong id="scoreNum">0</strong><small>/ 10 doğru</small></span></div></div>
+      <div class="verdict" id="verdict"></div>
+      <p class="verdict-sub" id="verdictSub"></p>
+      <div class="offer">
+        <h3>SON GECE <span>EHLİYET KAMPI</span></h3>
+        <ul>
+          <li>📚 300+ görselli hap soru</li>
+          <li>📝 5 deneme sınavı (gerçek sınav formatında)</li>
+          <li>🚦 Trafik • ⛑️ İlk Yardım • 🔧 Motor</li>
+          <li>📱 Telefondan hemen erişim</li>
+        </ul>
+        <span class="soon">ÇOK YAKINDA</span>
+      </div>
+      <div class="stack">
+        <a class="btn" id="dmBtn" href="https://ig.me/m/ehliyetcikmissorular" target="_blank" rel="noopener">📩 Ön kayıt için DM at</a>
+        <button class="btn secondary" id="retryBtn">↻ Tekrar çöz</button>
+      </div>
+      <p class="note">Paket açıldığında ön kayıt olanlara ilk biz haber vereceğiz.</p>
+    </section>
+  </main>
+
+  <footer>Son Gece Ehliyet Kampı • Instagram: @ehliyetcikmissorular<br>Bu site MEB ile bağlantılı değildir; sorular sınava hazırlık amaçlıdır.</footer>
+</div>
+
+<script>
+/* ---------- Levha çizimleri (SVG) ---------- */
+const tri = (inner) => `<svg width="170" height="150" viewBox="0 0 120 106"><path d="M60 6 L114 100 H6 Z" fill="#fff" stroke="#E30613" stroke-width="10" stroke-linejoin="round"/>${inner}</svg>`;
+const SIGNS = {
+  anaYol: `<svg width="150" height="150" viewBox="0 0 100 100"><rect x="18" y="18" width="64" height="64" transform="rotate(45 50 50)" fill="#fff" stroke="#111" stroke-width="3"/><rect x="29" y="29" width="42" height="42" transform="rotate(45 50 50)" fill="#FFD400"/></svg>`,
+  kaygan: tri(`<g transform="translate(60 68)"><rect x="-14" y="-14" width="28" height="13" rx="4" fill="#111"/><rect x="-10" y="-21" width="20" height="9" rx="3" fill="#111"/><circle cx="-9" cy="0" r="3.5" fill="#111"/><circle cx="9" cy="0" r="3.5" fill="#111"/><path d="M-14 8 q5 6 0 12 M-2 8 q5 6 0 12 M10 8 q5 6 0 12" stroke="#111" stroke-width="3" fill="none"/></g>`),
+  solViraj: tri(`<path d="M68 88 V64 Q68 46 50 44" stroke="#111" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M38 44 L54 33 L54 55 Z" fill="#111"/>`),
+  yolVer: `<svg width="170" height="150" viewBox="0 0 120 106"><path d="M6 6 H114 L60 100 Z" fill="#fff" stroke="#E30613" stroke-width="10" stroke-linejoin="round"/></svg>`,
+  dur: `<svg width="150" height="150" viewBox="0 0 100 100"><polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30" fill="#E30613" stroke="#fff" stroke-width="3"/><text x="50" y="60" text-anchor="middle" font-family="Arial Black,Arial" font-weight="900" font-size="28" fill="#fff">DUR</text></svg>`,
+  giris: `<svg width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#E30613"/><rect x="18" y="42" width="64" height="16" fill="#fff"/></svg>`,
+  park: `<svg width="150" height="150" viewBox="0 0 100 100"><circle cx="50" cy="50" r="42" fill="#1F5FBF" stroke="#E30613" stroke-width="9"/><line x1="22" y1="22" x2="78" y2="78" stroke="#E30613" stroke-width="9"/></svg>`,
+};
+
+/* ---------- Sorular ---------- */
+const QUESTIONS = [
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"anaYol",
+    o:["Ana yol","Tali yol","Kavşak","Ana yolun sonu"], a:0,
+    e:"Sarı karo levha, bulunduğun yolun ana yol olduğunu ve kavşaklarda geçiş üstünlüğünün sende olduğunu bildirir." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"kaygan",
+    o:["Tehlikeli viraj","Kaygan yol","Yol çalışması","Gevşek şev"], a:1,
+    e:"Kayan araç ve izleri çizili levha, yolun kaygan olabileceğini bildirir. Hızını düşür, ani fren ve manevradan kaçın." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"solViraj",
+    o:["Sağa tehlikeli viraj","Sola tehlikeli viraj","Tehlikeli devamlı virajlar","Soldan daralan yol"], a:1,
+    e:"İleride sola doğru tehlikeli bir viraj olduğunu bildirir. Virajdan önce hızını azaltmalısın." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"yolVer",
+    o:["Dur","Kavşak","Yol ver","Tehlike uyarısı"], a:2,
+    e:"Ters üçgen levha \"Yol ver\" demektir. Ana yoldaki araçlara geçiş hakkı vermelisin." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"dur",
+    o:["Yavaşla","Dur","Durmak yasaktır","Park yasaktır"], a:1,
+    e:"Sekizgen DUR levhasında yol boş olsa bile mutlaka tam durmalı, sonra geçiş hakkına uyarak devam etmelisin." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"giris",
+    o:["Taşıt trafiğine kapalı yol","Girişi olmayan yol","Durmak yasaktır","Tek yönlü yol"], a:1,
+    e:"Kırmızı daire içinde beyaz yatay şerit \"Girişi olmayan yol\" levhasıdır. Bu yöne girilemez." },
+  { cat:"Trafik ve Çevre", q:"Şekildeki trafik işareti ne anlama gelir?", img:"park",
+    o:["Duraklamak ve park etmek yasaktır","Park etmek yasaktır","Park yeri","Geçme yasağı"], a:1,
+    e:"Tek çapraz çizgi \"Park etmek yasaktır\" anlamına gelir. Çarpı (iki çizgi) olsaydı duraklamak ve park etmek yasak olurdu." },
+  { cat:"İlk Yardım", q:"Yetişkinde temel yaşam desteği uygulanırken kalp masajı ile suni solunum oranı kaç olmalıdır?",
+    o:["15 : 2","30 : 2","5 : 1","30 : 5"], a:1,
+    e:"Yetişkinlerde 30 göğüs basısına 2 suni solunum (30:2) uygulanır." },
+  { cat:"Araç Tekniği", q:"Sürüş sırasında gösterge panelinde yağdanlık şeklindeki ikaz lambası yanarsa bu neyi gösterir?",
+    o:["Motor suyu azalmıştır","Yakıt azalmıştır","Motor yağ basıncı düşüktür","Fren balataları aşınmıştır"], a:2,
+    e:"Yağdanlık simgesi motor yağ basıncının düşük olduğunu gösterir. Güvenli bir yerde durup motoru kapatmalı ve yağ seviyesini kontrol etmelisin." },
+  { cat:"Trafik ve Çevre", q:"Aksi bir işaret yoksa, yerleşim yeri içinde otomobiller için azami hız sınırı kaç km/s'dir?",
+    o:["30 km/s","50 km/s","70 km/s","82 km/s"], a:1,
+    e:"Yerleşim yeri içinde otomobiller için azami hız, aksi belirtilmedikçe 50 km/s'dir." },
+];
+
+/* ---------- Durum ---------- */
+const $ = (id) => document.getElementById(id);
+let idx = 0, score = 0, timer = null, tLeft = 10, locked = false;
+const TIME = 10;
+
+function show(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); $(id).classList.add('active'); window.scrollTo(0,0); }
+
+function start(){ idx = 0; score = 0; show('quiz'); render(); }
+
+function render(){
+  const q = QUESTIONS[idx];
+  locked = false;
+  $('qCount').textContent = `Soru ${idx+1} / ${QUESTIONS.length}`;
+  $('prog').style.width = `${(idx)/QUESTIONS.length*100}%`;
+  $('qCat').textContent = q.cat;
+  $('qText').textContent = q.q;
+  $('qImg').innerHTML = q.img ? SIGNS[q.img] : '';
+  $('qImg').style.display = q.img ? 'grid' : 'none';
+  $('explain').className = 'explain'; $('explain').innerHTML = '';
+  $('nextBtn').className = 'btn';
+  $('nextBtn').textContent = idx === QUESTIONS.length-1 ? 'Sonucu Gör ›' : 'Sonraki Soru ›';
+  const box = $('opts'); box.innerHTML = '';
+  q.o.forEach((txt,i)=>{
+    const b = document.createElement('button');
+    b.className = 'opt'; b.innerHTML = `<b>${'ABCD'[i]}</b><span>${txt}</span>`;
+    b.onclick = () => answer(i);
+    box.appendChild(b);
+  });
+  startTimer();
+}
+
+function startTimer(){
+  clearInterval(timer); tLeft = TIME;
+  $('tLeft').textContent = tLeft; $('timer').classList.remove('warn');
+  const bar = $('tbar'); bar.style.transition = 'none'; bar.style.width = '100%';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ bar.style.transition = `width ${TIME}s linear`; bar.style.width = '0%'; }));
+  timer = setInterval(()=>{
+    tLeft--; $('tLeft').textContent = Math.max(tLeft,0);
+    if (tLeft <= 3) $('timer').classList.add('warn');
+    if (tLeft <= 0){ clearInterval(timer); answer(-1); }
+  }, 1000);
+}
+
+function answer(i){
+  if (locked) return; locked = true; clearInterval(timer);
+  const bar = $('tbar'); const w = getComputedStyle(bar).width; bar.style.transition='none'; bar.style.width = w;
+  const q = QUESTIONS[idx]; const btns = $('opts').children;
+  [...btns].forEach(b=>b.disabled = true);
+  btns[q.a].classList.add('correct');
+  let head;
+  if (i === q.a){ score++; head = '✅ Doğru!'; }
+  else if (i === -1){ head = '⏱️ Süre doldu!'; }
+  else { btns[i].classList.add('wrong'); head = `❌ Yanlış. Doğru cevap: ${'ABCD'[q.a]}`; }
+  $('explain').innerHTML = `<strong>${head}</strong>💡 ${q.e}`;
+  $('explain').classList.add('show');
+  $('nextBtn').classList.add('show');
+}
+
+function next(){
+  if (idx < QUESTIONS.length-1){ idx++; render(); }
+  else finish();
+}
+
+function finish(){
+  $('prog').style.width = '100%';
+  show('result');
+  $('scoreNum').textContent = score;
+  $('ring').style.setProperty('--p', score*10);
+  let v, s;
+  if (score >= 9){ v = '🏆 Harikasın!'; s = 'Sınava çok hazırsın. Son gece kampıyla deneme sınavlarını da çöz, rahat gir.'; }
+  else if (score >= 7){ v = '👍 Fena değil!'; s = 'Az kaldı! Eksik kalan konuları hap sorularla kapatırsan sınavı rahat geçersin.'; }
+  else if (score >= 5){ v = '⚠️ Biraz daha tekrar lazım'; s = 'Gerçek sınavda 50 sorunun en az 35\'ini bilmen gerekiyor. Hızlı tekrar tam sana göre.'; }
+  else { v = '😬 Sınava hazır değilsin'; s = 'Endişelenme! Görselli hap sorularla en çok çıkan konuları hızlıca tekrar edebilirsin.'; }
+  $('verdict').textContent = v; $('verdictSub').textContent = s;
+}
+
+$('heroSign').innerHTML = SIGNS.anaYol;
+$('startBtn').onclick = start;
+$('nextBtn').onclick = next;
+$('retryBtn').onclick = start;
+</script>
+</body>
+</html>
